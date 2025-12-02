@@ -7,7 +7,7 @@ use crate::api::handlers::{resource_handlers, auth_handlers, health_handlers};
 
 /// 404处理程序
 async fn not_found_handler() -> (StatusCode, &'static str) {
-    (StatusCode::NOT_FOUND, "404 Not Found - GoComicMosaic 后端服务")
+    (StatusCode::NOT_FOUND, "404 Not Found - 密影库 后端服务")
 }
 
 /// 创建API路由

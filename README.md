@@ -1,4 +1,4 @@
-# GoComicMosaic
+# 密影库 (SecretGallery)
 一款用于私密图片和私密视频保存的安全平台，采用高强度加密技术确保您的隐私资源安全可靠。
 
 ## 项目定位
@@ -79,7 +79,7 @@
 ```bash
 # 克隆仓库
 git clone <repository-url>
-cd GoComicMosaic
+cd 密影库
 
 # 安装依赖
 cd frontend
@@ -143,4 +143,4 @@ MIT License
 
 ---
 
-**保护您的隐私，从GoComicMosaic开始！**
+**保护您的隐私，从密影库开始！**

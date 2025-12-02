@@ -7,14 +7,14 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: {
-    default: 'GoComicMosaic',
-    template: '%s - GoComicMosaic',
+    default: '密影库',
+    template: '%s - 密影库',
   },
-  description: '开源影视资源共建平台',
-  keywords: ['影视资源', '漫画', '共建平台', '开源'],
-  authors: [{ name: 'GoComicMosaic Team' }],
-  creator: 'GoComicMosaic Team',
-  publisher: 'GoComicMosaic Team',
+  description: '私密图片和视频安全存储平台',
+  keywords: ['私密图片', '私密视频', '安全存储', '加密'],
+  authors: [{ name: '密影库团队' }],
+  creator: '密影库团队',
+  publisher: '密影库团队',
   formatDetection: {
     email: false,
     address: false,
@@ -37,7 +37,7 @@ export default function RootLayout({
               <div className="brand">
                 <a href="/" className="brand-link">
                   <span className="brand-icon">📸</span>
-                  <span className="brand-text">GoComicMosaic</span>
+                  <span className="brand-text">密影库</span>
                 </a>
               </div>
               <nav>
@@ -76,7 +76,7 @@ export default function RootLayout({
               </div>
               <div className="footer-divider"></div>
               <div className="copyright">
-                <p>© 2025 GoComicMosaic. 开源影视资源共建平台.</p>
+                <p>© 2025 密影库. 私密图片和视频安全存储平台.</p>
                 <p>使用 Next.js + React 18 + TypeScript 构建</p>
               </div>
             </div>
