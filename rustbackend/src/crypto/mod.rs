@@ -8,9 +8,9 @@ pub mod encode;
 pub mod decode;
 
 // 重新导出公共API
-pub use key_management::{generate_key_hash, verify_key_hash, derive_key_from_password, get_key_from_info, generate_salt, generate_iv, generate_random_key};
-pub use encode::{encode_resource, EncryptionInfo};
-pub use decode::{decode_resource, parse_encryption_info, verify_key};
+pub use key_management::{generate_key_hash};
+pub use encode::{encode_resource};
+pub use decode::{decode_resource, verify_key};
 
 // 重新导出错误类型
 pub use key_management::KeyManagementError;
@@ -104,6 +104,7 @@ impl EncryptionService {
     }
     
     /// 加密资源
+    #[allow(dead_code)]
     pub fn encrypt_resource(
         &self,
         data: &[u8],
@@ -119,6 +120,7 @@ impl EncryptionService {
     }
     
     /// 解密资源
+    #[allow(dead_code)]
     pub fn decrypt_resource(
         &self,
         encrypted_data: &[u8],
@@ -132,6 +134,7 @@ impl EncryptionService {
     }
     
     /// 验证密钥
+    #[allow(dead_code)]
     pub fn verify_resource_key(
         &self,
         key_part_a: &str,

@@ -1,12 +1,10 @@
-# old
-frontend-vue/
-gobackend/
-docs/
+# rustbackend
+rustbackend/target/
 
-# new
+# frontend
 **/frontend/node_modules/
 frontend/.next/
-rustbackend/target/
+
 
 # db
 rustbackend/db.sqlite

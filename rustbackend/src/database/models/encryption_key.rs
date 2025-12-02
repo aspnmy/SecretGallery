@@ -3,6 +3,7 @@ use sqlx::FromRow;
 
 /// 加密密钥模型
 #[derive(FromRow, Debug, Serialize, Deserialize, Clone)]
+#[allow(dead_code)]
 pub struct EncryptionKey {
     pub id: i32,
     pub resource_id: i32,
@@ -13,6 +14,7 @@ pub struct EncryptionKey {
 
 /// 创建加密密钥请求模型
 #[derive(Debug, Serialize, Deserialize, Clone)]
+#[allow(dead_code)]
 pub struct CreateEncryptionKeyRequest {
     pub resource_id: i32,
     pub key_hash: String,
@@ -21,6 +23,7 @@ pub struct CreateEncryptionKeyRequest {
 
 /// 更新加密密钥请求模型
 #[derive(Debug, Serialize, Deserialize, Clone)]
+#[allow(dead_code)]
 pub struct UpdateEncryptionKeyRequest {
     pub key_hash: String,
     pub ukey_info: String,
@@ -28,6 +31,7 @@ pub struct UpdateEncryptionKeyRequest {
 
 /// 解密请求模型
 #[derive(Debug, Serialize, Deserialize, Clone)]
+#[allow(dead_code)]
 pub struct DecryptRequest {
     pub key_part_a: String,
     pub ukey_part_b: String,
@@ -36,12 +40,14 @@ pub struct DecryptRequest {
 
 /// 解密响应模型
 #[derive(Debug, Serialize, Deserialize, Clone)]
+#[allow(dead_code)]
 pub struct DecryptResponse {
     pub media_data: Vec<u8>,
     pub media_type: String,
     pub is_local: bool,
 }
 
+#[allow(dead_code)]
 impl EncryptionKey {
     /// 创建新的加密密钥
     pub fn new(resource_id: i32, key_hash: String, ukey_info: String) -> Self {

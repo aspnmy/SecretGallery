@@ -8,4 +8,4 @@ pub mod user;
 pub mod encryption_key;
 
 /// 重新导出模型
-pub use resource::{Resource, CreateResourceRequest, UpdateResourceRequest, ResourceQueryParams, ResourceStats, ResourceResponse};
+pub use resource::{CreateResourceRequest, UpdateResourceRequest, ResourceQueryParams, ResourceStats, ResourceResponse};

@@ -16,12 +16,15 @@ pub enum DatabaseError {
     QueryError(#[from] anyhow::Error),
     
     #[error("数据库事务错误: {0}")]
+    #[allow(dead_code)]
     TransactionError(String),
     
     #[error("数据库记录未找到")]
+    #[allow(dead_code)]
     RecordNotFound,
     
     #[error("数据库约束违反: {0}")]
+    #[allow(dead_code)]
     ConstraintViolation(String),
 }
 
@@ -38,12 +41,14 @@ pub async fn init_database_pool(config: &AppConfig) -> Result<DatabasePool, Data
     info!("PostgreSQL数据库连接池初始化成功，最大连接数: {}", config.database.pool_size);
     
     // 执行数据库迁移
-    if let Err(e) = run_migrations(&pool).await {
-        error!("数据库迁移失败: {}", e);
-        return Err(DatabaseError::MigrationError(e.to_string()));
+    match run_migrations(&pool).await {
+        Ok(_) => info!("数据库迁移执行成功"),
+        Err(e) => {
+            error!("数据库迁移失败: {}", e);
+            error!("继续启动应用，但数据库迁移可能需要手动处理");
+            // 不再因为迁移失败而终止应用
+        }
     }
-    
-    info!("数据库迁移执行成功");
     
     Ok(pool)
 }
@@ -57,6 +62,7 @@ async fn run_migrations(pool: &DatabasePool) -> Result<(), sqlx::Error> {
 }
 
 /// 检查数据库连接是否正常
+#[allow(dead_code)]
 pub async fn check_database_connection(pool: &DatabasePool) -> Result<(), DatabaseError> {
     sqlx::query("SELECT 1")
         .execute(pool)
@@ -66,6 +72,7 @@ pub async fn check_database_connection(pool: &DatabasePool) -> Result<(), Databa
 }
 
 /// 获取数据库版本
+#[allow(dead_code)]
 pub async fn get_database_version(pool: &DatabasePool) -> Result<String, DatabaseError> {
     let version: String = sqlx::query_scalar("SELECT version();")
         .fetch_one(pool)

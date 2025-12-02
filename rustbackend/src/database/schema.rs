@@ -1,9 +1,11 @@
 use sqlx::migrate::Migrator;
 
 // 数据库迁移器
+#[allow(dead_code)]
 pub static MIGRATOR: Migrator = sqlx::migrate!("./migrations");
 
 /// 数据库表名常量
+#[allow(dead_code)]
 pub mod table_name {
     pub const RESOURCES: &str = "resources";
     pub const USERS: &str = "users";
@@ -23,18 +25,21 @@ pub mod resource_status {
 }
 
 /// 媒体类型枚举
+#[allow(dead_code)]
 pub mod media_type {
     pub const VIDEO: &str = "video";
     pub const IMAGE: &str = "image";
 }
 
 /// 加密算法枚举
+#[allow(dead_code)]
 pub mod encryption_algorithm {
     pub const AES256GCM: &str = "AES256GCM";
     pub const CHACHA20POLY1305: &str = "CHACHA20POLY1305";
 }
 
 /// SQL查询常量
+#[allow(dead_code)]
 pub mod query {
     // 资源查询
     pub const GET_RESOURCES: &str = "SELECT * FROM resources";

@@ -4,6 +4,7 @@ use sqlx::FromRow;
 
 /// 用户模型
 #[derive(FromRow, Debug, Serialize, Deserialize, Clone)]
+#[allow(dead_code)]
 pub struct User {
     pub id: i32,
     pub username: String,
@@ -15,6 +16,7 @@ pub struct User {
 
 /// 创建用户请求模型
 #[derive(Debug, Serialize, Deserialize, Clone)]
+#[allow(dead_code)]
 pub struct CreateUserRequest {
     pub username: String,
     pub password: String,
@@ -23,6 +25,7 @@ pub struct CreateUserRequest {
 
 /// 更新用户请求模型
 #[derive(Debug, Serialize, Deserialize, Clone)]
+#[allow(dead_code)]
 pub struct UpdateUserRequest {
     pub username: Option<String>,
     pub password: Option<String>,
@@ -31,6 +34,7 @@ pub struct UpdateUserRequest {
 
 /// 用户响应模型（不包含密码哈希）
 #[derive(Debug, Serialize, Deserialize, Clone)]
+#[allow(dead_code)]
 pub struct UserResponse {
     pub id: i32,
     pub username: String,
@@ -41,6 +45,7 @@ pub struct UserResponse {
 
 /// 登录请求模型
 #[derive(Debug, Serialize, Deserialize, Clone)]
+#[allow(dead_code)]
 pub struct LoginRequest {
     pub username: String,
     pub password: String,
@@ -48,6 +53,7 @@ pub struct LoginRequest {
 
 /// 登录响应模型
 #[derive(Debug, Serialize, Deserialize, Clone)]
+#[allow(dead_code)]
 pub struct LoginResponse {
     pub access_token: String,
     pub token_type: String,
@@ -56,11 +62,13 @@ pub struct LoginResponse {
 
 /// 密码更新请求模型
 #[derive(Debug, Serialize, Deserialize, Clone)]
+#[allow(dead_code)]
 pub struct PasswordUpdateRequest {
     pub current_password: String,
     pub new_password: String,
 }
 
+#[allow(dead_code)]
 impl User {
     /// 创建新用户
     pub fn new(username: String, hashed_password: String, is_admin: bool) -> Self {

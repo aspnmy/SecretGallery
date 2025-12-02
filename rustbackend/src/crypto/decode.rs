@@ -9,6 +9,7 @@ use crate::crypto::encode::EncryptionInfo;
 
 /// 资源解码错误类型
 #[derive(Error, Debug)]
+#[allow(dead_code)]
 pub enum DecodeError {
     #[error("解密算法错误: {0}")]
     AlgorithmError(String),
@@ -111,30 +112,35 @@ pub fn decode_resource(
 }
 
 /// 解析加密信息
+#[allow(dead_code)]
 pub fn parse_encryption_info(encryption_info_json: &str) -> Result<EncryptionInfo, DecodeError> {
     let info: EncryptionInfo = serde_json::from_str(encryption_info_json)?;
     Ok(info)
 }
 
 /// 从加密信息中获取媒体类型
+#[allow(dead_code)]
 pub fn get_media_type_from_encryption_info(encryption_info: &str) -> Result<String, DecodeError> {
     let info = parse_encryption_info(encryption_info)?;
     Ok(info.media_type)
 }
 
 /// 从加密信息中获取是否本地资源
+#[allow(dead_code)]
 pub fn get_is_local_from_encryption_info(encryption_info: &str) -> Result<bool, DecodeError> {
     let info = parse_encryption_info(encryption_info)?;
     Ok(info.is_local)
 }
 
 /// 从加密信息中获取算法
+#[allow(dead_code)]
 pub fn get_algorithm_from_encryption_info(encryption_info: &str) -> Result<String, DecodeError> {
     let info = parse_encryption_info(encryption_info)?;
     Ok(info.algorithm)
 }
 
 /// 验证密钥是否正确
+#[allow(dead_code)]
 pub fn verify_key(
     key_part_a: &str,
     ukey_part_b: &str,

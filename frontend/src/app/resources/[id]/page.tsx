@@ -115,19 +115,19 @@ export default function ResourceDetailPage({ searchParams }: ResourceDetailPageP
             photos={mediaItems}
             columns={4}
             spacing={12}
-            renderPhoto={(photo, photoProps) => {
+            renderPhoto={(props) => {
+              const photo = props.photo;
               // 根据媒体类型渲染不同的组件
               if (photo.type === 'video') {
                 return (
                   <div
                     key={photo.id}
-                    {...photoProps}
+                    {...props}
                     className="relative group"
                   >
                     <div className="aspect-[16/9] bg-black rounded-lg overflow-hidden">
                       <video
                         src={photo.src}
-                        alt={photo.alt}
                         className="w-full h-full object-cover"
                         poster={resource.poster_image}
                         muted
@@ -149,7 +149,7 @@ export default function ResourceDetailPage({ searchParams }: ResourceDetailPageP
               return (
                 <div
                   key={photo.id}
-                  {...photoProps}
+                  {...props}
                   className="relative group"
                 >
                   <Image
@@ -172,7 +172,6 @@ export default function ResourceDetailPage({ searchParams }: ResourceDetailPageP
                 {mediaItems[selectedImageIndex]?.type === 'video' ? (
                   <video
                     src={mediaItems[selectedImageIndex]?.src || ''}
-                    alt={mediaItems[selectedImageIndex]?.alt || ''}
                     className="rounded-lg max-w-full h-auto object-contain"
                     controls
                     poster={resource.poster_image}

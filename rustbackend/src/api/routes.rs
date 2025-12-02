@@ -1,4 +1,4 @@
-use axum::{Router, routing::get, routing::post, routing::put, routing::delete, Extension, http::StatusCode, routing::any};
+use axum::{Router, routing::get, routing::post, routing::put, routing::delete, Extension, http::StatusCode};
 use std::sync::Arc;
 
 use crate::config::AppConfig;

@@ -10,6 +10,7 @@ use crate::crypto::key_management::{self, KeyInfo, get_key_from_info, generate_k
 
 /// 资源编码错误类型
 #[derive(Error, Debug)]
+#[allow(dead_code)]
 pub enum EncodeError {
     #[error("加密算法错误: {0}")]
     AlgorithmError(String),
@@ -38,6 +39,7 @@ pub enum EncodeError {
 
 /// 加密信息
 #[derive(Debug, Serialize, Deserialize, Clone)]
+#[allow(dead_code)]
 pub struct EncryptionInfo {
     pub key_info: KeyInfo,
     pub iv: String,
@@ -126,18 +128,21 @@ pub fn encode_resource(
 }
 
 /// 从加密信息中获取媒体类型
+#[allow(dead_code)]
 pub fn get_media_type_from_encryption_info(encryption_info: &str) -> Result<String, EncodeError> {
     let info: EncryptionInfo = serde_json::from_str(encryption_info)?;
     Ok(info.media_type)
 }
 
 /// 从加密信息中获取是否本地资源
+#[allow(dead_code)]
 pub fn get_is_local_from_encryption_info(encryption_info: &str) -> Result<bool, EncodeError> {
     let info: EncryptionInfo = serde_json::from_str(encryption_info)?;
     Ok(info.is_local)
 }
 
 /// 从加密信息中获取算法
+#[allow(dead_code)]
 pub fn get_algorithm_from_encryption_info(encryption_info: &str) -> Result<String, EncodeError> {
     let info: EncryptionInfo = serde_json::from_str(encryption_info)?;
     Ok(info.algorithm)

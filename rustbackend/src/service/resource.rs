@@ -10,6 +10,7 @@ use crate::config::AppConfig;
 
 /// 资源服务错误类型
 #[derive(thiserror::Error, Debug)]
+#[allow(dead_code)]
 pub enum ResourceServiceError {
     #[error("数据库错误: {0}")]
     DatabaseError(#[from] DatabaseError),
@@ -50,8 +51,9 @@ pub enum ResourceServiceError {
 
 /// 资源服务
 pub struct ResourceService {
-    db: DatabasePool,
-    config: AppConfig,
+  pub db: DatabasePool,
+    pub config: AppConfig,
+    #[allow(dead_code)]
     encryption_service: EncryptionService,
 }
 
@@ -497,11 +499,12 @@ impl ResourceService {
     }
     
     /// 更新加密密钥
+    #[allow(dead_code)]
     async fn update_encryption_key(
-        &self,
-        resource_id: i32,
-        update_req: &UpdateEncryptionKeyRequest
-    ) -> Result<EncryptionKey, ResourceServiceError> {
+          &self,
+          resource_id: i32,
+          update_req: &UpdateEncryptionKeyRequest
+      ) -> Result<EncryptionKey, ResourceServiceError> {
         let encryption_key = query_as!(EncryptionKey, "SELECT * FROM encryption_keys WHERE resource_id = $1", resource_id)
             .fetch_optional(&self.db)
             .await
@@ -529,10 +532,11 @@ impl ResourceService {
     }
     
     /// 获取加密密钥
+    #[allow(dead_code)]
     async fn get_encryption_key(
-        &self,
-        resource_id: i32
-    ) -> Result<EncryptionKey, ResourceServiceError> {
+          &self,
+          resource_id: i32
+      ) -> Result<EncryptionKey, ResourceServiceError> {
         let encryption_key = query_as!(EncryptionKey, "SELECT * FROM encryption_keys WHERE resource_id = $1", resource_id)
             .fetch_optional(&self.db)
             .await

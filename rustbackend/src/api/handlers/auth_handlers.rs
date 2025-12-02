@@ -4,6 +4,7 @@ use tracing::info;
 
 /// 登录请求
 #[derive(Deserialize, Debug)]
+#[allow(dead_code)]
 pub struct LoginRequest {
     /// 用户名
     pub username: String,
@@ -13,6 +14,7 @@ pub struct LoginRequest {
 
 /// 注册请求
 #[derive(Deserialize, Debug)]
+#[allow(dead_code)]
 pub struct RegisterRequest {
     /// 用户名
     pub username: String,

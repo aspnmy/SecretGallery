@@ -20,6 +20,7 @@ pub enum ConfigError {
 
 /// 服务器配置
 #[derive(Deserialize, Debug, Clone)]
+#[allow(dead_code)]
 pub struct ServerConfig {
     pub port: u16,
     pub host: String,
@@ -35,6 +36,7 @@ pub struct DatabaseConfig {
 
 /// JWT配置
 #[derive(Deserialize, Debug, Clone)]
+#[allow(dead_code)]
 pub struct JwtConfig {
     pub secret: String,
     pub expiration: u64,
@@ -50,6 +52,7 @@ pub struct EncryptionConfig {
 
 /// UKey配置
 #[derive(Deserialize, Debug, Clone)]
+#[allow(dead_code)]
 pub struct UKeyConfig {
     pub vendor: String,
     pub api_url: String,
@@ -57,6 +60,7 @@ pub struct UKeyConfig {
 
 /// TMDB配置
 #[derive(Deserialize, Debug, Clone)]
+#[allow(dead_code)]
 pub struct TmdbConfig {
     pub api_key: String,
     pub api_url: String,
@@ -65,6 +69,7 @@ pub struct TmdbConfig {
 
 /// 图片处理配置
 #[derive(Deserialize, Debug, Clone)]
+#[allow(dead_code)]
 pub struct ImageConfig {
     pub compression_quality: u8,
     pub max_width: u32,
@@ -73,6 +78,7 @@ pub struct ImageConfig {
 
 /// 日志配置
 #[derive(Deserialize, Debug, Clone)]
+#[allow(dead_code)]
 pub struct LogConfig {
     pub level: String,
     pub file: String,
@@ -80,6 +86,7 @@ pub struct LogConfig {
 
 /// CORS配置
 #[derive(Deserialize, Debug, Clone)]
+#[allow(dead_code)]
 pub struct CorsConfig {
     pub allow_origins: String,
     pub allow_methods: String,
@@ -88,6 +95,7 @@ pub struct CorsConfig {
 
 /// 上传配置
 #[derive(Deserialize, Debug, Clone)]
+#[allow(dead_code)]
 pub struct UploadConfig {
     pub max_size: u64,
     pub temp_dir: String,
@@ -95,6 +103,7 @@ pub struct UploadConfig {
 
 /// 应用配置
 #[derive(Deserialize, Debug, Clone)]
+#[allow(dead_code)]
 pub struct AppConfig {
     pub server: ServerConfig,
     pub database: DatabaseConfig,
@@ -182,21 +191,24 @@ impl AppConfig {
         Ok(())
     }
     
-    /// 获取数据库文件路径（仅SQLite）
+    /// 获取数据库路径（如果是SQLite）
+    #[allow(dead_code)]
     pub fn get_database_path(&self) -> Option<&Path> {
-        if let Some(path) = self.database.url.strip_prefix("sqlite:") {
-            Some(Path::new(path))
-        } else {
-            None
-        }
-    }
+          if let Some(path) = self.database.url.strip_prefix("sqlite:") {
+              Some(Path::new(path))
+          } else {
+              None
+          }
+      }
     
     /// 是否为开发环境
+    #[allow(dead_code)]
     pub fn is_development(&self) -> bool {
         self.server.env == "development"
     }
     
     /// 是否为生产环境
+    #[allow(dead_code)]
     pub fn is_production(&self) -> bool {
         self.server.env == "production"
     }

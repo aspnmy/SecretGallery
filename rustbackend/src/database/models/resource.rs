@@ -99,6 +99,7 @@ pub struct ResourceStats {
 
 impl Resource {
     /// 创建新资源
+    #[allow(dead_code)]
     pub fn new(create_req: CreateResourceRequest) -> Self {
         let now = chrono::Utc::now().naive_utc();
         
@@ -180,31 +181,37 @@ impl Resource {
     }
     
     /// 检查资源是否已批准
+    #[allow(dead_code)]
     pub fn is_approved(&self) -> bool {
         self.status == resource_status::APPROVED
     }
     
     /// 检查资源是否待审批
+    #[allow(dead_code)]
     pub fn is_pending(&self) -> bool {
         self.status == resource_status::PENDING
     }
     
     /// 检查资源是否已拒绝
+    #[allow(dead_code)]
     pub fn is_rejected(&self) -> bool {
         self.status == resource_status::REJECTED
     }
     
     /// 检查资源是否为视频
+    #[allow(dead_code)]
     pub fn is_video(&self) -> bool {
         self.media_type == "video"
     }
     
     /// 检查资源是否为图片
+    #[allow(dead_code)]
     pub fn is_image(&self) -> bool {
         self.media_type == "image"
     }
     
     /// 检查资源是否为本地上传
+    #[allow(dead_code)]
     pub fn is_local_resource(&self) -> bool {
         self.is_local
     }

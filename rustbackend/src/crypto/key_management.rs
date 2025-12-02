@@ -8,6 +8,7 @@ use crate::config::{AppConfig};
 
 /// 密钥管理错误类型
 #[derive(Error, Debug)]
+#[allow(dead_code)]
 pub enum KeyManagementError {
     #[error("密钥派生错误: {0}")]
     KeyDerivationError(String),
@@ -42,6 +43,7 @@ pub struct KeyInfo {
 }
 
 /// 生成盐值
+#[allow(dead_code)]
 pub fn generate_salt() -> Vec<u8> {
     let mut salt = vec![0u8; 16];
     let rng = rand::SystemRandom::new();
@@ -158,6 +160,7 @@ pub fn generate_iv() -> Vec<u8> {
 }
 
 /// 生成随机密钥
+#[allow(dead_code)]
 pub fn generate_random_key() -> [u8; 32] {
     let mut key = [0u8; 32];
     let rng = rand::SystemRandom::new();
