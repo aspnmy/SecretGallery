@@ -1,0 +1,96 @@
+[package]
+name = "rustbackend"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "rustbackend"
+path = "src/main.rs"
+
+[[bin]]
+name = "test_db"
+path = "src/test_db.rs"
+
+[[bin]]
+name = "env_test"
+path = "src/env_test.rs"
+
+[[bin]]
+name = "simple_db_test"
+path = "src/simple_db_test.rs"
+
+[[bin]]
+name = "db_test"
+path = "src/db_test.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# Web框架
+axum = { version = "0.7", features = ["macros", "http2", "json"] }
+
+# 异步运行时
+tokio = { version = "1", features = ["full"] }
+
+# HTTP客户端
+reqwest = { version = "0.11", features = ["json"] }
+
+# 数据库
+sqlx = { version = "0.7", features = ["postgres", "runtime-tokio-rustls", "json", "chrono"] }
+
+# 加密库
+ring = "0.17"
+
+# JWT
+jsonwebtoken = "9"
+
+# 配置管理
+dotenvy = "0.15"
+
+# 日志
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# 图片处理
+image = "0.24"
+
+# 工具库
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+chrono = { version = "0.4", features = ["serde", "timezone"] }
+base64 = "0.21"
+thiserror = "1"
+lazy_static = "1.4"
+anyhow = "1.0"
+
+# CORS中间件
+axum_cors = "0.1.7"
+
+# 密码哈希
+bcrypt = "0.15"
+
+# 命令行参数解析
+clap = { version = "4", features = ["derive"] }
+
+# 路径处理
+pathdiff = "0.2"
+
+[dev-dependencies]
+# 测试工具
+tokio-test = "0.4"
+http-body-util = "0.1"
+
+# 数据库测试
+wiremock = "0.6.5"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+
+[profile.dev]
+debug = 2
+opt-level = 0
+codegen-units = 256

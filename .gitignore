@@ -6,3 +6,11 @@ docs/
 # new
 **/frontend/node_modules/
 frontend/.next/
+rustbackend/target/
+
+# db
+rustbackend/db.sqlite
+rustbackend/.env
+
+# trae
+.trae/
