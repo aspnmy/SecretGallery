@@ -40,7 +40,7 @@ export const getResourceById = async (id: number): Promise<Resource> => {
     const response = await apiClient.get<{ data: Resource }>(`/resources/${id}`);
     return response.data.data;
   } catch (error) {
-    console.error(`获取资源 ${id} 详情失败:', error);
+    console.error(`获取资源 ${id} 详情失败:`, error);
     throw error;
   }
 };
@@ -71,7 +71,7 @@ export const updateResource = async (id: number, resource: Partial<Resource>): P
     const response = await apiClient.put<{ data: Resource }>(`/resources/${id}`, resource);
     return response.data.data;
   } catch (error) {
-    console.error(`更新资源 ${id} 失败:', error);
+    console.error(`更新资源 ${id} 失败:`, error);
     throw error;
   }
 };
@@ -86,7 +86,7 @@ export const deleteResource = async (id: number): Promise<boolean> => {
     await apiClient.delete(`/resources/${id}`);
     return true;
   } catch (error) {
-    console.error(`删除资源 ${id} 失败:', error);
+    console.error(`删除资源 ${id} 失败:`, error);
     throw error;
   }
 };

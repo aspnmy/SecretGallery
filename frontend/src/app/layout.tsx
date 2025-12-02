@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import '@/styles/globals.css';
+import FloatingButtons from '@/components/FloatingButtons';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,31 +29,61 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="zh-CN">
-      <body className={inter.className}>
-        <div className="min-h-screen bg-background text-foreground">
-          <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b">
-            <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-              <h1 className="text-xl font-bold">GoComicMosaic</h1>
+    <html lang="zh-CN" className="scroll-smooth">
+      <body className={`${inter.className} app-container`}>
+        <header className="app-header">
+          <div className="container">
+            <div className="header-inner">
+              <div className="brand">
+                <a href="/" className="brand-link">
+                  <span className="brand-icon">📸</span>
+                  <span className="brand-text">GoComicMosaic</span>
+                </a>
+              </div>
               <nav>
-                <ul className="flex space-x-4">
-                  <li><a href="/resources" className="hover:text-primary transition-colors">资源列表</a></li>
-                  <li><a href="/submit" className="hover:text-primary transition-colors">提交资源</a></li>
-                  <li><a href="/login" className="hover:text-primary transition-colors">登录</a></li>
-                  <li><a href="/admin" className="hover:text-primary transition-colors">管理</a></li>
+                <ul className="nav-links">
+                  <li><a href="/resources" className="nav-link">资源列表</a></li>
+                  <li><a href="/submit" className="nav-link">提交资源</a></li>
+                  <li><a href="/login" className="nav-link">登录</a></li>
+                  <li><a href="/admin" className="nav-link">管理</a></li>
                 </ul>
               </nav>
+              <div className="header-actions">
+                <div className="button-group">
+                  <a href="/submit" className="btn btn-primary">
+                    <span className="btn-text">+ 提交资源</span>
+                  </a>
+                </div>
+              </div>
             </div>
-          </header>
-          <main className="container mx-auto px-4 py-6">
-            {children}
-          </main>
-          <footer className="mt-auto py-6 border-t">
-            <div className="container mx-auto px-4 text-center text-sm text-muted">
-              <p>© 2025 GoComicMosaic. 开源影视资源共建平台.</p>
+          </div>
+        </header>
+        <main className="main-content">
+          <div className="container">
+            <div className="content-container fade-in-up">
+              {children}
             </div>
-          </footer>
-        </div>
+          </div>
+        </main>
+        <footer className="app-footer">
+          <div className="container">
+            <div className="footer-inner">
+              <div className="footer-row">
+                <a href="/resources" className="footer-link">资源列表</a>
+                <a href="/submit" className="footer-link">提交资源</a>
+                <a href="/login" className="footer-link">登录</a>
+                <a href="/admin" className="footer-link">管理</a>
+              </div>
+              <div className="footer-divider"></div>
+              <div className="copyright">
+                <p>© 2025 GoComicMosaic. 开源影视资源共建平台.</p>
+                <p>使用 Next.js + React 18 + TypeScript 构建</p>
+              </div>
+            </div>
+          </div>
+        </footer>
+        {/* 悬浮按钮 */}
+        <FloatingButtons />
       </body>
     </html>
   );

@@ -1,108 +1,146 @@
-# GoComicMosaicAV
-一款开源影视资源共建平台，不同用户可以自由提交资源信息(标题、类型、简介、图片、资源链接)，像马赛克一样，由多方贡献拼凑成完整资源。 集成网盘搜索、分季分集剧集信息查看、在线点播(支持采集解析和自定义爬虫)等功能
+# GoComicMosaic
+一款用于私密图片和私密视频保存的安全平台，采用高强度加密技术确保您的隐私资源安全可靠。
 
-# 集成了小姐姐搜刮器
-方便搜刮更彻底
-小姐姐搜刮器基于这个项目https://github.com/Yuukiy/JavSP.git
+## 项目定位
+本项目专注于私密图片和私密视频的安全保存，核心特点包括：
 
-如果喜欢，点个star  
+- **数据库存储**：所有图片和视频文件经过编码转换后直接保存在数据库中，而非传统的文件系统存储
+- **双重加密机制**：资源访问需要双重密钥验证
+  - 解密密钥A：用户自定义的私密密钥
+  - 硬件码B：从硬件UKey中读取的唯一硬件标识
+  - 实际解密密钥：A+B组合生成
+- **安全转码**：资源写入时自动进行编码转换，读取时需要正确密钥才能解码还原
+- **快照式数据管理**：支持数据库快照、还原操作，方便数据迁移和备份
+- **标准化框架**：前后端业务仅作为资源编码写入和读取的标准框架存在
+
+## 技术架构
+
+### 前端
+- **框架**：Next.js 13 + React 18 + TypeScript
+- **样式**：Tailwind CSS + 现代化玻璃态设计
+- **状态管理**：Zustand
+- **HTTP客户端**：Axios
+- **图片处理**：react-dropzone + compressorjs
+- **布局组件**：react-photo-album
+
+### 后端
+- **核心功能**：资源编码、解码、数据库管理
+- **安全机制**：双重密钥验证、硬件UKey支持
+
+## 核心功能
+
+### 1. 资源加密存储
+- 图片和视频文件上传时自动进行编码转换
+- 编码后的数据直接存储在数据库中
+- 支持多种图片和视频格式
+- 图片自动压缩优化
+
+### 2. 双重密钥解密
+- 用户输入解密密钥A
+- 系统读取硬件UKey中的硬件码B
+- 组合生成实际解密密钥
+- 只有正确密钥才能解码查看资源
+
+### 3. 资源管理
+- 支持资源分类和标签管理
+- 资源预览和查看
+- 资源上传和删除
+- 资源信息编辑
+
+### 4. 数据快照与还原
+- 支持数据库快照创建
+- 一键数据还原功能
+- 方便的数据迁移方案
+
+## 应用场景
+
+- **个人隐私资源保存**：保护个人私密图片和视频
+- **敏感数据存储**：企业或组织的敏感视觉资料保存
+- **加密云存储**：提供比传统云存储更高的安全性
+- **硬件绑定访问**：确保资源只能在特定硬件上访问
+
+## 安全特性
+
+- **端到端加密**：资源在上传前进行编码，下载后进行解码
+- **数据库加密**：数据库本身支持加密存储
+- **硬件绑定**：资源访问与特定硬件UKey绑定
+- **双重验证**：需要密码和硬件双重验证
+- **无明文存储**：系统中不存储任何明文资源
+
+## 部署方式
+
+### 前提条件
+- Node.js 18+
+- 现代浏览器（支持Web Crypto API）
+- 硬件UKey设备
+
+### 开发环境
+
+```bash
+# 克隆仓库
+git clone <repository-url>
+cd GoComicMosaic
+
+# 安装依赖
+cd frontend
+npm install
+
+# 启动开发服务器
+npm run dev
+
+# 构建生产版本
+npm run build
+
+# 启动生产服务器
+npm start
+```
+
+### 生产部署
+
+1. 构建生产版本
+2. 配置环境变量
+3. 部署到服务器
+4. 配置数据库
+5. 配置硬件UKey支持
+
+## 使用流程
+
+1. **上传资源**：通过前端界面上传图片或视频
+2. **资源编码**：系统自动将资源编码并存储到数据库
+3. **访问资源**：
+   - 输入解密密钥A
+   - 插入硬件UKey
+   - 系统验证双重密钥
+   - 成功后解码并显示资源
+4. **数据管理**：定期创建数据库快照，用于备份和还原
+
+## 安全最佳实践
+
+- 选择强密码作为解密密钥A
+- 妥善保管硬件UKey，避免丢失
+- 定期更换解密密钥A
+- 定期创建数据库快照备份
+- 只在安全网络环境下访问系统
+
+## 注意事项
+
+- 本系统不提供资源分享功能，仅用于个人或授权访问
+- 丢失解密密钥A或硬件UKey将导致资源无法恢复
+- 请务必定期备份数据库快照
+- 硬件UKey需要兼容本系统的读取协议
+
+## 许可证
+
+MIT License
+
+## 贡献
+
+欢迎提交Issue和Pull Request，共同改进系统安全性和功能。
+
+## 安全声明
+
+本系统采用多种安全机制保护您的隐私资源，但请您务必遵循安全最佳实践，妥善保管密钥和硬件设备，以确保资源安全。
 
 ---
 
-## Docker一键部署
-
-```
-docker run -d --name dongman \
-  -p 80:80 -p 443:443 \
-  -v /your/local/path:/app/data \
-  -e DOMAIN=your-domain.com \
-  2011820123/gcm:latest
-```
-
-如需启用HTTPS，需要在挂载目录中放置SSL证书：
-
-1. 创建SSL证书目录：
-   ```bash
-   mkdir -p /your/local/path/ssl
-   ```
-
-2. 复制证书文件（必须使用这些文件名）：
-   ```bash
-   cp /path/to/your/fullchain.pem /your/local/path/ssl/
-   cp /path/to/your/privkey.pem /your/local/path/ssl/
-   ```
-
-
-## 首页
-![image|690x397](https://raw.githubusercontent.com/fishforks/imgs/refs/heads/main/gcm/1.jpg)
-
-## 详情页
-
-
-点击「盘搜」按钮，一键搜索各种网盘资源
-
-![image|690x397](https://raw.githubusercontent.com/fishforks/imgs/refs/heads/main/gcm/pansou.gif)
-
-点击「剧集探索」按钮，可以查看分季分集信息  
-![image|690x397](https://raw.githubusercontent.com/fishforks/imgs/refs/heads/main/gcm/30.gif)
-
-可以一键生成分享海报和链接
-![image|690x397](https://raw.githubusercontent.com/fishforks/imgs/refs/heads/main/gcm/29.gif)
-
-一键在线点播
-
-![image|690x397](https://raw.githubusercontent.com/fishforks/imgs/refs/heads/main/gcm/dianbo.gif)
-
-也可以直接在`https://域名/streams`页面点播，支持采集解析和自定义爬虫
-
-![image|690x397](https://raw.githubusercontent.com/fishforks/imgs/refs/heads/main/gcm/streams.gif)
-
-
-
-## 全面支持管理后台设置网站信息和采集解析源
-目前美漫共建官网内置30条数据源  
-![image|690x397](https://raw.githubusercontent.com/fishforks/imgs/refs/heads/main/gcm/26.gif)
-
-## 支持外挂在线播放数据源(自定义爬虫)
-会写爬虫的用户可以自己添加数据源，更加灵活。参考[外接数据源开发者文档](https://github.com/fish2018/GoComicMosaic/blob/main/docs/%E5%A4%96%E6%8E%A5%E6%95%B0%E6%8D%AE%E6%BA%90%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3.md)，提供[爬虫示例及模板](https://github.com/fish2018/GoComicMosaic/tree/main/docs/%E5%A4%96%E6%8E%A5%E6%95%B0%E6%8D%AE%E6%BA%90%E7%A4%BA%E4%BE%8B%E5%8F%8A%E6%A8%A1%E6%9D%BF)  
-![image|690x397](https://raw.githubusercontent.com/fishforks/imgs/refs/heads/main/gcm/27.gif)
-
-## 提交资源
-这个才是资源共建平台的核心，点击右上角的'提交资源'，用户可以随意提交自己喜欢的动漫资源，如果网站还不存该美漫时，会是一个新建资源的表单，需要填写中文名、英文名、类型、简介等基础信息。提交后，要等管理员在后台审批完才会在首页显示
-
-### 提交-新建资源
-勾选了小姐姐搜刮器，默认只从小姐姐搜刮器中搜索元素。如果同时存在正常资源和小姐姐，应该只在小姐姐资源中启用这个搜刮器
-支持从TMDB搜索、预览、一键导入资源
-![image|690x397](https://raw.githubusercontent.com/fishforks/imgs/refs/heads/main/gcm/28.gif)
-
-### 提交-补充资源
-顾名思义，就是对已经存在的动漫资源补充一些信息，主要是图片、资源链接
-补充提交有2个入口，一个是右上角的'提交资源'，搜索已经存在的动漫名，然后选择确认即可
-![image|690x396](https://raw.githubusercontent.com/fishforks/imgs/refs/heads/main/gcm/10.jpg)  
-
-![补充资源|690x392](https://raw.githubusercontent.com/fishforks/imgs/refs/heads/main/gcm/11.gif)
-
-从资源详情页点击'补充资源'按钮，不用自己再搜索选择了，自动绑定对应的动漫
-![详情页补充|690x392](https://raw.githubusercontent.com/fishforks/imgs/refs/heads/main/gcm/12.gif)
-
-## 管理控制台
-主要用于审批用户提交的资源
-
-![image|690x398](https://raw.githubusercontent.com/fishforks/imgs/refs/heads/main/gcm/14.jpg)
-
-审批用户提交的资源
-![后台审批|690x391](https://raw.githubusercontent.com/fishforks/imgs/refs/heads/main/gcm/15.gif)
-
-## 资源编辑(管理员权限)
-管理员在动漫详情页面，可以进行编辑，修改中英文标题、简介、类型、图片增删、海报设置、修改添加资源链接等
-![image|690x365](https://raw.githubusercontent.com/fishforks/imgs/refs/heads/main/gcm/16.jpg)  
-![image|690x303](https://raw.githubusercontent.com/fishforks/imgs/refs/heads/main/gcm/17.jpg)  
-
-![详情编辑|690x391](https://raw.githubusercontent.com/fishforks/imgs/refs/heads/main/gcm/18.gif)
-
-
-## 新增点播源汇总
-管理员后台可以设置点播源汇总，汇总的json点播源可以被影视仓、TVBOX等各种空壳应用加载
-
-
-
+**保护您的隐私，从GoComicMosaic开始！**

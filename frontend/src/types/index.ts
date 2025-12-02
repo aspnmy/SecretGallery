@@ -1,12 +1,37 @@
+// 视频信息类型
+export type VideoInfo = {
+  id?: number;
+  url: string;
+  width: number;
+  height: number;
+  size: number;
+  mime_type: string;
+  is_local: boolean; // 区分本地上传视频还是URL视频
+};
+
+// 图片信息类型
+export type ImageInfo = {
+  id?: number;
+  url: string;
+  width: number;
+  height: number;
+  size: number;
+  mime_type: string;
+};
+
 // 资源类型
-export type ResourceType = {
+export type Resource = {
   id: number;
   title: string;
   title_en: string;
   description: string;
   resource_type: string;
+  author?: string;
+  source: string;
+  tags: string[];
   poster_image: string;
-  images: string[];
+  images: ImageInfo[];
+  videos: VideoInfo[]; // 视频数组，支持多个视频
   links: {
     magnet: string[];
     ed2k: string[];
@@ -31,6 +56,9 @@ export type ResourceType = {
   liked_by: number[];
   is_approved: boolean;
 };
+
+// 资源类型别名，保持向后兼容
+export type ResourceType = Resource;
 
 // 用户类型
 export type User = {
@@ -69,6 +97,22 @@ export type ResourceQuery = {
   search?: string;
   sort?: 'created_at' | 'updated_at' | 'title';
   order?: 'asc' | 'desc';
+};
+
+// 获取资源请求
+export type GetResourcesRequest = {
+  type?: string;
+  page?: number;
+  limit?: number;
+  search?: string;
+};
+
+// 获取资源响应
+export type GetResourcesResponse = {
+  data: Resource[];
+  total: number;
+  page: number;
+  limit: number;
 };
 
 // 资源提交请求

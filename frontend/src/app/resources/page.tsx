@@ -73,82 +73,76 @@ export default function ResourcesPage({ searchParams }: ResourcesPageProps) {
   }));
 
   return (
-    <div>
-      <div className="mb-6 flex justify-between items-center">
-        <h1 className="text-2xl font-bold">资源列表</h1>
-        <div className="flex space-x-2">
+    <div className="space-y-6">
+      <div className="flex justify-between items-center flex-wrap gap-4">
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent animate-fade-in">资源列表</h1>
+        <div className="flex space-x-3 bg-background p-1.5 rounded-lg shadow-sm">
           <button
-            className={`px-4 py-2 rounded-md transition-colors ${albumType === 'video' ? 'bg-primary text-white' : 'bg-secondary text-foreground'}`}
+            className={`btn-custom ${albumType === 'video' ? 'btn-primary' : 'btn-outline'} flex-1 px-6 py-2 rounded-md transition-all`}
             onClick={() => setAlbumType('video')}
           >
-            视频相册
+            <span className="btn-text">视频相册</span>
           </button>
           <button
-            className={`px-4 py-2 rounded-md transition-colors ${albumType === 'image' ? 'bg-primary text-white' : 'bg-secondary text-foreground'}`}
+            className={`btn-custom ${albumType === 'image' ? 'btn-primary' : 'btn-outline'} flex-1 px-6 py-2 rounded-md transition-all`}
             onClick={() => setAlbumType('image')}
           >
-            图片相册
+            <span className="btn-text">图片相册</span>
           </button>
         </div>
       </div>
 
       {albumType === 'image' ? (
-        <PhotoAlbum
-          layout="masonry"
-          photos={photos}
-          columns={4}
-          spacing={16}
-          defaultContainerWidth={1200}
-          renderPhoto={(photo, { photoProps, imageProps, renderDefaultPhoto }) => (
-            <a href={photo.href} className="group">
-              {renderDefaultPhoto({ 
-                photoProps: { 
-                  ...photoProps,
-                  className: `${photoProps.className} overflow-hidden rounded-lg shadow-sm transition-all duration-300 group-hover:shadow-md group-hover:scale-[1.02]`,
-                },
-                imageProps: { 
-                  ...imageProps,
-                  className: `${imageProps.className} object-cover`,
-                  loading: 'lazy',
-                },
-              })}
-              <div className="mt-2 text-sm text-center">
-                {resources.find(r => r.id === parseInt(photo.id))?.title}
-              </div>
-            </a>
-          )}
-        />
+        <div className="card p-6 animate-slide-in-up">
+          <PhotoAlbum
+            layout="masonry"
+            photos={photos}
+            columns={4}
+            spacing={16}
+            defaultContainerWidth={1200}
+          />
+        </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 animate-slide-in-up">
           {resources.map((resource) => (
             <a
               key={resource.id}
               href={`/resources/${resource.id}`}
-              className="block group bg-secondary rounded-lg overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+              className="card overflow-hidden group"
             >
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-52 overflow-hidden">
                 <Image
                   src={resource.poster_image || 'https://via.placeholder.com/600x400'}
                   alt={resource.title}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end">
                   <div className="p-4 text-white">
-                    <h3 className="font-semibold text-lg">{resource.title}</h3>
-                    <p className="text-sm text-white/80">{resource.resource_type || '未分类'}</p>
+                    <h3 className="font-semibold text-lg line-clamp-1">{resource.title}</h3>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className="badge">{resource.resource_type || '未分类'}</span>
+                      <span className="text-xs text-white/80">{new Date(resource.created_at).toLocaleDateString()}</span>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="p-4">
-                <p className="text-sm line-clamp-2 text-muted-foreground mb-3">
+              <div className="p-5">
+                <p className="text-sm line-clamp-2 text-dark mb-4">
                   {resource.description || '暂无简介'}
                 </p>
-                <div className="flex justify-between items-center text-xs text-muted-foreground">
-                  <span>{resource.images?.length || 0} 张图片</span>
-                  <span>{new Date(resource.created_at).toLocaleDateString()}</span>
+                <div className="flex justify-between items-center text-xs">
+                  <span className="text-gray flex items-center gap-1">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    {resource.images?.length || 0} 张
+                  </span>
+                  {resource.tags && resource.tags.length > 0 && (
+                    <span className="text-primary font-medium">{resource.tags.length} 标签</span>
+                  )}
                 </div>
               </div>
             </a>
@@ -157,8 +151,17 @@ export default function ResourcesPage({ searchParams }: ResourcesPageProps) {
       )}
 
       {resources.length === 0 && (
-        <div className="text-center py-20 text-muted-foreground">
-          <p>暂无资源</p>
+        <div className="text-center py-20 animate-fade-in">
+          <div className="inline-block p-8 card mb-4">
+            <svg className="w-16 h-16 text-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <p className="text-xl text-gray font-medium">暂无资源</p>
+          <p className="text-gray mt-2">快来提交第一个资源吧！</p>
+          <a href="/submit" className="inline-block mt-4 btn btn-primary">
+            <span className="btn-text">提交资源</span>
+          </a>
         </div>
       )}
     </div>

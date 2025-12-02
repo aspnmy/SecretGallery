@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  swcMinify: false, // 禁用SWC，使用Babel代替
   images: {
     domains: ['localhost', 'example.com'],
     remotePatterns: [
